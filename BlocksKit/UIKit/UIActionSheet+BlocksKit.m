@@ -83,11 +83,10 @@
 
 @dynamic bk_willShowBlock, bk_didShowBlock, bk_willDismissBlock, bk_didDismissBlock;
 
-+ (void)load
-{
+__attribute__((constructor)) static void initialize_UIActionSheet(void) {
 	@autoreleasepool {
-		[self bk_registerDynamicDelegate];
-		[self bk_linkDelegateMethods:@{
+		[[UIActionSheet class] bk_registerDynamicDelegate];
+		[[UIActionSheet class] bk_linkDelegateMethods:@{
 			@"bk_willShowBlock": @"willPresentActionSheet:",
 			@"bk_didShowBlock": @"didPresentActionSheet:",
 			@"bk_willDismissBlock": @"actionSheet:willDismissWithButtonIndex:",

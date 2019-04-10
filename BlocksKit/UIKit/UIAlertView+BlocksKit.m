@@ -111,11 +111,10 @@
 
 @dynamic bk_willShowBlock, bk_didShowBlock, bk_willDismissBlock, bk_didDismissBlock, bk_shouldEnableFirstOtherButtonBlock;
 
-+ (void)load
-{
+__attribute__((constructor)) static void initialize_UIAlertView(void) {
 	@autoreleasepool {
-		[self bk_registerDynamicDelegate];
-		[self bk_linkDelegateMethods:@{
+		[[UIAlertView class] bk_registerDynamicDelegate];
+		[[UIAlertView class] bk_linkDelegateMethods:@{
 			@"bk_willShowBlock": @"willPresentAlertView:",
 			@"bk_didShowBlock": @"didPresentAlertView:",
 			@"bk_willDismissBlock": @"alertView:willDismissWithButtonIndex:",

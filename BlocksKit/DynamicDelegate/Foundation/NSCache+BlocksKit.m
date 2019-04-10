@@ -33,11 +33,10 @@
 
 @dynamic bk_willEvictBlock;
 
-+ (void)load
-{
+__attribute__((constructor)) static void initialize_NSCache(void) {
 	@autoreleasepool {
-		[self bk_registerDynamicDelegate];
-		[self bk_linkDelegateMethods:@{ @"bk_willEvictBlock": @"cache:willEvictObject:" }];
+		[[NSCache class] bk_registerDynamicDelegate];
+		[[NSCache class] bk_linkDelegateMethods:@{ @"bk_willEvictBlock": @"cache:willEvictObject:" }];
 	}
 }
 

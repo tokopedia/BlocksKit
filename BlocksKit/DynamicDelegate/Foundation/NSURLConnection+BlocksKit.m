@@ -337,11 +337,10 @@ static NSString *const kDownloadBlockKey = @"NSURLConnectionDidRecieveData";
 
 @dynamic delegate, bk_responseBlock, bk_failureBlock;
 
-+ (void)load
-{
+__attribute__((constructor)) static void initialize_NSURLConnection(void) {
 	@autoreleasepool {
-		[self bk_registerDynamicDelegate];
-		[self bk_linkDelegateMethods:@{ @"bk_responseBlock": @"connection:didReceiveResponse:", @"bk_failureBlock": @"connection:didFailWithError:" }];
+		[[NSURLConnection class] bk_registerDynamicDelegate];
+		[[NSURLConnection class] bk_linkDelegateMethods:@{ @"bk_responseBlock": @"connection:didReceiveResponse:", @"bk_failureBlock": @"connection:didFailWithError:" }];
 	}
 }
 

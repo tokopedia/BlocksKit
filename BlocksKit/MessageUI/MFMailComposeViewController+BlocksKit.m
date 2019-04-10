@@ -59,11 +59,10 @@
 
 @dynamic bk_completionBlock;
 
-+ (void)load
-{
+__attribute__((constructor)) static void initialize_MFMailComposeViewController(void) {
 	@autoreleasepool {
-		[self bk_registerDynamicDelegateNamed:@"mailComposeDelegate"];
-		[self bk_linkDelegateMethods:@{ @"bk_completionBlock": @"mailComposeController:didFinishWithResult:error:" }];
+		[[MFMailComposeViewController class] bk_registerDynamicDelegateNamed:@"mailComposeDelegate"];
+		[[MFMailComposeViewController class] bk_linkDelegateMethods:@{ @"bk_completionBlock": @"mailComposeController:didFinishWithResult:error:" }];
 	}
 }
 

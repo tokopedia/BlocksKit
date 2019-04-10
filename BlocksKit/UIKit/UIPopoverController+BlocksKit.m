@@ -47,11 +47,10 @@
 
 @dynamic bk_didDismissBlock, bk_shouldDismissBlock;
 
-+ (void)load
-{
+__attribute__((constructor)) static void initialize_UIPopoverController(void) {
 	@autoreleasepool {
-		[self bk_registerDynamicDelegate];
-		[self bk_linkDelegateMethods:@{ @"bk_didDismissBlock": @"popoverControllerDidDismissPopover:", @"bk_shouldDismissBlock": @"popoverControllerShouldDismissPopover:" }];
+		[[UIPopoverController class] bk_registerDynamicDelegate];
+		[[UIPopoverController class] bk_linkDelegateMethods:@{ @"bk_didDismissBlock": @"popoverControllerDidDismissPopover:", @"bk_shouldDismissBlock": @"popoverControllerShouldDismissPopover:" }];
 	}
 }
 

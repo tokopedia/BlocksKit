@@ -42,11 +42,10 @@
 @dynamic bk_didFinishPickingMediaBlock;
 @dynamic bk_didCancelBlock;
 
-+ (void)load
-{
+__attribute__((constructor)) static void initialize_UIImagePickerController(void) {
 	@autoreleasepool {
-		[self bk_registerDynamicDelegate];
-		[self bk_linkDelegateMethods:@{ @"bk_didFinishPickingMediaBlock": @"imagePickerController:didFinishPickingMediaWithInfo:",
+		[[UIImagePickerController class] bk_registerDynamicDelegate];
+		[[UIImagePickerController class] bk_linkDelegateMethods:@{ @"bk_didFinishPickingMediaBlock": @"imagePickerController:didFinishPickingMediaWithInfo:",
                                         @"bk_didCancelBlock": @"imagePickerControllerDidCancel:" }];
 	}
 }

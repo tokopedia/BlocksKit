@@ -63,11 +63,10 @@
 
 @dynamic bk_shouldStartLoadBlock, bk_didStartLoadBlock, bk_didFinishLoadBlock, bk_didFinishWithErrorBlock;
 
-+ (void)load
-{
+__attribute__((constructor)) static void initialize_UIWebView(void) {
 	@autoreleasepool {
-		[self bk_registerDynamicDelegate];
-		[self bk_linkDelegateMethods:@{
+		[[UIWebView class] bk_registerDynamicDelegate];
+		[[UIWebView class] bk_linkDelegateMethods:@{
 			@"bk_shouldStartLoadBlock": @"webView:shouldStartLoadWithRequest:navigationType:",
 			@"bk_didStartLoadBlock": @"webViewDidStartLoad:",
 			@"bk_didFinishLoadBlock": @"webViewDidFinishLoad:",

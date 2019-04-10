@@ -59,11 +59,10 @@
 
 @dynamic bk_completionBlock;
 
-+ (void)load
-{
+__attribute__((constructor)) static void initialize_MFMessageComposeViewController(void) {
 	@autoreleasepool {
-		[self bk_registerDynamicDelegateNamed:@"messageComposeDelegate"];
-		[self bk_linkDelegateMethods:@{ @"bk_completionBlock": @"messageComposeViewController:didFinishWithResult:" }];
+		[[MFMessageComposeViewController class] bk_registerDynamicDelegateNamed:@"messageComposeDelegate"];
+		[[MFMessageComposeViewController class] bk_linkDelegateMethods:@{ @"bk_completionBlock": @"messageComposeViewController:didFinishWithResult:" }];
 	}
 }
 
